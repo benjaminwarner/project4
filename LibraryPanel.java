@@ -8,9 +8,6 @@ public class LibraryPanel extends JPanel {
 	private BookListPanel bookList;
 	private BookInfoPanel bookInfo;
 	private Scanner csvParser;
-	
-	private Library library = new Library();
-	private String defaultCsvPath = "./etext/booklist-full.csv";
 
 	public LibraryPanel(int width, int height) {
 		setPreferredSize(new Dimension(width, height));
@@ -21,14 +18,6 @@ public class LibraryPanel extends JPanel {
 		
 		bookInfo = new BookInfoPanel("Book Info", width / 2, height);
 		add(bookInfo, BorderLayout.EAST);
-		
-		loadBooksFromCsv(defaultCsvPath);
-		setBookList();
-	}
-	
-	private void loadBooksFromCsv(String path) {
-		library.clearBooks();
-		library.loadLibraryFromCSV(path);
 	}
 	
 	private void setBookList() {
