@@ -7,17 +7,17 @@ public class ReaderOfBooksPanel extends JPanel {
 	
 	private ReaderPanel reader;
 	private LibraryPanel library;
-	private Dimension size = new Dimension(900, 900);
+	private Dimension size = new Dimension(1200, 500);
 
 	public ReaderOfBooksPanel() {
 		
 		setPreferredSize(size);
 		setLayout(new BorderLayout());
 		
-		library = new LibraryPanel(size.width, 225);
-		add(library, BorderLayout.NORTH);
+		library = new LibraryPanel(500, size.height);
+		add(library, BorderLayout.WEST);
 		
-		reader = new ReaderPanel(size.width, size.height - 400);
-		add(reader, BorderLayout.SOUTH);
+		reader = new ReaderPanel(size.width - 500, size.height);
+		add(reader, BorderLayout.EAST);
 	}
 }

@@ -22,7 +22,7 @@ public class LibraryPanel extends JPanel {
 		bookList = new BookListPanel("Library", width / 2, height);
 		add(bookList, BorderLayout.WEST);
 		
-		bookInfo = new BookInfoPanel("Book Info", width / 2, height - 100);
+		bookInfo = new BookInfoPanel("Book Info", width / 2, height);
 		add(bookInfo, BorderLayout.EAST);
 		
 		loadBooksFromCsv(defaultCsvPath);
@@ -35,10 +35,7 @@ public class LibraryPanel extends JPanel {
 	}
 	
 	private void setBookList() {
-		String[] availableBooks = new String[library.size()];
-		for (int i = 0; i < library.size(); ++i) {
-			availableBooks[i] = library.getBook(i).getTitle();
-		}
-		bookList.setBooks(availableBooks);
+		Book[] books = new Book[library.size()];
+		bookList.setBookButtons(library.getBooks().toArray(books));
 	}
 }

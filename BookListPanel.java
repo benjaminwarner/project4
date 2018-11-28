@@ -1,59 +1,51 @@
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.BorderLayout;
-
+import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.*;
 
 public class BookListPanel extends JPanel {
 
-	private DefaultListModel model;
-	private JList<String> books;
 	private JTextField importTextField;
 	private JButton importButton;
-	private Dimension dimension;
+	private Dimension size;
+	private JScrollPane scrollPane;
+	private JPanel bookListPanel;
+	private JPanel importPanel;
 	
 	public BookListPanel(String title, int width, int height) {
-		dimension = new Dimension(width, height);
-		setLayout(new BorderLayout());
-		setPreferredSize(dimension);
+		size = new Dimension(width, height);
+		setLayout(new BorderLayout(0, 10));
+		setPreferredSize(size);
 		Border titledBorder = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.BLACK), title);
 		Border border = BorderFactory.createCompoundBorder(titledBorder, new EmptyBorder(10, 5, 10, 5));
 		setBorder(border);
 		
-		addImportPanel();
-		addBookList();
-	}
-	
-	private void addImportPanel() {
-		JPanel importPanel = new JPanel();
+		bookListPanel = new JPanel();
+		bookListPanel.setLayout(new GridLayout(0, 1, 0, 10));
+		
+		scrollPane = new JScrollPane(bookListPanel);
+		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPane.validate();
+		add(scrollPane, BorderLayout.CENTER);
+		
+		importPanel = new JPanel();
 		importPanel.setLayout(new BorderLayout());
-		importPanel.setMaximumSize(new Dimension(dimension.width, 45));
 		
 		importTextField = new JTextField();
-		importTextField.setPreferredSize(new Dimension(dimension.width - 100, importTextField.getHeight()));
+		importTextField.setPreferredSize(new Dimension(size.width - 100, importTextField.getHeight()));
 		importPanel.add(importTextField, BorderLayout.WEST);
 		
 		importButton = new JButton("Import");
 		importPanel.add(importButton, BorderLayout.EAST);
 		
-		add(importPanel, BorderLayout.NORTH);
+		add(importPanel, BorderLayout.SOUTH);
 	}
 	
-	private void addBookList() {
-		
-		model = new DefaultListModel();
-		books = new JList(model);
-		books.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		JScrollPane scrollPane = new JScrollPane(books);
-		scrollPane.setMinimumSize(new Dimension(dimension.width, dimension.height - 75));
-		add(scrollPane, BorderLayout.SOUTH);
-	}
-	
-	public void setBooks(String[] books) {
-		model.clear();
+	public void setBookButtons(Book[] books) {
+		bookListPanel.removeAll();
 		for (int i = 0; i < books.length; ++i) {
-			model.addElement(books[i]);
+			BookButton button = new BookButton(books[i]);
+			button.setPreferredSize(new Dimension(size.width - 50, 25));
+			bookListPanel.add(button);
 		}
 	}
 }
