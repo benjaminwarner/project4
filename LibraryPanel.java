@@ -1,9 +1,6 @@
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
+import java.awt.*;
 import java.io.*;
 import java.util.Scanner;
-
 import javax.swing.*;
 
 public class LibraryPanel extends JPanel {
@@ -36,6 +33,6 @@ public class LibraryPanel extends JPanel {
 	
 	private void setBookList() {
 		Book[] books = new Book[library.size()];
-		bookList.setBookButtons(library.getBooks().toArray(books));
+		bookList.setBookButtons(library.getBooks().toArray(books), bookInfo);
 	}
 }

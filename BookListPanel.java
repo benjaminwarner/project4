@@ -40,10 +40,10 @@ public class BookListPanel extends JPanel {
 		add(importPanel, BorderLayout.SOUTH);
 	}
 	
-	public void setBookButtons(Book[] books) {
+	public void setBookButtons(Book[] books, BookInfoPanel infoPanel) {
 		bookListPanel.removeAll();
 		for (int i = 0; i < books.length; ++i) {
-			BookButton button = new BookButton(books[i]);
+			BookButton button = new BookButton(books[i], infoPanel);
 			button.setPreferredSize(new Dimension(size.width - 50, 25));
 			bookListPanel.add(button);
 		}
